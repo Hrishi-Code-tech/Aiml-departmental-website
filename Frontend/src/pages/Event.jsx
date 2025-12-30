@@ -17,7 +17,7 @@ import "swiper/css/pagination";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const SOCKET_URL = "https://aiml-departmental-website-n.onrender.com"; // Update as needed
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL; // Update as needed
 
 const Event = () => {
   const [selectedClub, setSelectedClub] = useState("AIMSA");
@@ -30,9 +30,9 @@ const Event = () => {
     const socket = io(SOCKET_URL, { transports: ["websocket"] });
 
     const fetchEvents = async () => {
-    const apiUrl = import.meta.env.VITE_API_URL;
+      const apiUrl = import.meta.env.VITE_API_URL;
       try {
-        
+
         const response = await axios.get(`${apiUrl}/events`);
         setEvents(response.data.events || []);
       } catch (error) {
@@ -66,9 +66,8 @@ const Event = () => {
 
   return (
     <div
-      className={`p-10 bg-gray-100 min-h-screen ${
-        isDialogOpen ? "overflow-hidden" : ""
-      }`}
+      className={`p-10 bg-gray-100 min-h-screen ${isDialogOpen ? "overflow-hidden" : ""
+        }`}
     >
       <motion.h1
         className="text-center text-5xl font-extrabold mb-10 text-gray-900 tracking-wide"
@@ -81,9 +80,8 @@ const Event = () => {
 
       {/* Club Filter Buttons */}
       <motion.div
-        className={`flex justify-center text-gray-100 gap-6 mb-10 transition-opacity duration-300 ${
-          isDialogOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
+        className={`flex justify-center text-gray-100 gap-6 mb-10 transition-opacity duration-300 ${isDialogOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -93,10 +91,9 @@ const Event = () => {
             key={club}
             onClick={() => setSelectedClub(club)}
             className={`px-6 py-3 rounded-lg text-lg text-gray-700 font-medium transition shadow-md 
-              ${
-                selectedClub === club
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-300 hover:bg-gray-400"
+              ${selectedClub === club
+                ? "bg-blue-600 text-white"
+                : "bg-gray-300 hover:bg-gray-400"
               }`}
           >
             {club}
@@ -106,9 +103,8 @@ const Event = () => {
 
       {/* Event Cards Grid */}
       <motion.div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 transition-opacity duration-300 ${
-          isDialogOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 transition-opacity duration-300 ${isDialogOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}

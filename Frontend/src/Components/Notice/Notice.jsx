@@ -6,7 +6,7 @@ export default function Notice() {
   const [notices, setNotices] = useState([]);
 
   useEffect(() => {
-    const socket = io("https://aiml-departmental-website-n.onrender.com");
+    const socket = io(import.meta.env.VITE_SOCKET_URL);
     const apiUrl = import.meta.env.VITE_API_URL;
 
     fetch(`${apiUrl}/admin/notices`)
